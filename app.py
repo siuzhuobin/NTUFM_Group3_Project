@@ -53,7 +53,12 @@ def generate_shopping_list():
 @app.route("/subscription",methods=["GET","POST"])
 def subscription():
     return(render_template("subscription.html"))
-    
+
+@app.route("/thankyou", methods=["GET"])
+def thankyou():
+    r = model.generate_content() 
+    return render_template("thankyou.html", r=r)
+
 if __name__ == "__main__": # apparently, this checks if the thingy is being run onto the cloud? 
     app.run()
 
