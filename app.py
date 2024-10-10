@@ -50,6 +50,10 @@ def generate_shopping_list():
     
     return(render_template("shopping_list.html", r = result_str))
 
+@app.route("/subscription",methods=["GET","POST"])
+def subscription():
+    return(render_template("subscription.html"))
+    
 if __name__ == "__main__": # apparently, this checks if the thingy is being run onto the cloud? 
     app.run()
 
