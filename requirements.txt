@@ -3,3 +3,4 @@ gunicorn
 google.generativeai
 textblob
 markdown
+re
