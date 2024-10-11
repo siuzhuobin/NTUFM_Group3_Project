@@ -4,27 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Healthy Grocery Shopping Guide</title>
-
-    
-    <style>
-        .autocomplete-items {
-            border-bottom: none;
-            border-top: none;
-            z-index: 99;
-            position: absolute;
-            overflow-y: auto;
-        }
-
-        .autocomplete-items div {
-            padding: 10px;
-            cursor: pointer;
-        }
-
-        .autocomplete-items div:hover {
-            background-color: #e9e9e9;
-        }
-    
-    </style>
     
     <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
 
@@ -40,20 +19,35 @@
     </header>
     
     <main>
-        <form class="filter-form" action="/generate_food_info" method="POST" id="the_form">
+        <form onsubmit="get_food_info(); return false" id="food_item_entry_form">
             <div class="autocomplete" style="width:300px;">
-                <input id="food_item" type="text" placeholder="Rice">
+                <input id="food_item" type="text" value="Rice">
             </div>
-            <button type="submit">Get food information</button>
-        </form>
-    
+            <button type="submit" id="btn_get_food_info">Get food information</button>
         
-    
+        </form>
+        <span id="output_area"></span>
+
+        <form onsubmit="get_food_offers(); return false", id="food_offers_form">
+        Check availability at a Sheng Shiong in ...
+        <select id="SS_branch_region">
+        </select>
+        <button type="go" id="btn_get_offers_info">Go</button>
+        <span id="offers_output_area"></span>
+        </form>
+
+    </div>
+    <form onsubmit="window.history.back(); return false">
+        <button type="submit">Back</button>
+    </form>
+
     </main>
 
 <script>
+    const food_items = {{food_items | safe}}
+    const init_food = {{init_food | safe}}
+    const SS_branch_regions = {{SS_branch_regions | safe}}
 
-    const food_items = {{f | safe}}
 
     function autocomplete(input, arr) {
         let currentFocus;
@@ -125,25 +119,68 @@
             closeAllLists(e.target);
         });
     }
-    // Function to get URL parameters
-    function getParameterByName(name) {
-        name = name.replace(/[\[\]]/g, "\\$&");
-        let url = window.location.href;
-        let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-            results = regex.exec(url);
-        if (!results) return null;
-        if (!results[2]) return '';
-        return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
 
-    autocomplete(document.getElementById("food_item"), food_items);
-    // Get the parameter named 'clickButton'
-    let clickButton = getParameterByName('clickButton');
 
-    // Check the parameter value and click the button if it's 'true'
-    if (clickButton === 'true') {
-        document.getElementById('myButton').click();
-    }
+    document.addEventListener("DOMContentLoaded", function() {
+        autocomplete(document.getElementById("food_item"), food_items);
+
+        if (init_food!="")
+        {
+            document.getElementById("food_item").value = init_food;
+            document.getElementById("btn_get_food_info").click();
+        }
+        const dropdown = document.getElementById('SS_branch_region');
+        const options = SS_branch_regions;
+
+        options.forEach(option => {
+            const newOption = document.createElement('option');
+            newOption.value = option;
+            newOption.text = option;
+            dropdown.add(newOption);
+        });
+        dropdown.selectedIndex = 0;
+        document.getElementById("food_offers_form").hidden = true
+        document.getElementById("food_item").addEventListener('input', function() {
+                document.getElementById("food_offers_form").hidden = true
+            });
+        document.getElementById("SS_branch_region").addEventListener('change', function() {
+            document.getElementById('btn_get_offers_info').click()
+        }
+    )
+    
+    
+    
+    });
+
+    
+    async function get_food_info(event) {
+            const formData = new FormData();
+            formData.append('food', document.getElementById("food_item").value)
+            const response = await fetch('/get_food_info', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.text();
+            document.getElementById('output_area').innerHTML = result;
+            if (result != 'Item not found'){
+                document.getElementById("food_offers_form").hidden = false
+            }
+
+
+        }
+
+        async function get_food_offers(event) {
+            const formData = new FormData();
+            formData.append('food', document.getElementById("food_item").value)
+            formData.append('branch_region', document.getElementById("SS_branch_region").value)
+            
+            const response = await fetch('/get_food_offers', {
+                method: 'POST',
+                body: formData
+            });
+            const result = await response.text();
+            document.getElementById('offers_output_area').innerHTML = result;
+        }
 
 
 </script>

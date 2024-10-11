@@ -16,14 +16,13 @@
 
     <main>
         <h2>Reply:  </h2>
-        <div class="scrollable_long_text">
         <p>
                 {% block body %}
                 {{r | safe }}
                 {% endblock %}
         </p>
         <form action="/" method="POST">
-            <button type="submit">Back</button>
+            <button type="Home">Back</button>
         </form>
         </div>
     </main>

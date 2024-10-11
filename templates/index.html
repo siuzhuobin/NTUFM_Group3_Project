@@ -17,39 +17,27 @@
     </header>
     
     <main>
-        <form class="filter-form" action="/generate_shopping_list" method="POST" id="the_form">
-            <label for="race">Select Race:</label>
-            <select id="race" name="race">
-                <option value="chinese" selected>Chinese</option>
-                <option value="malay">Malay</option>
-                <option value="indian">Indian</option>
-            </select>
-
-            <label for="diet">Select Diet:</label>
-            <select id="diet" name="diet">
-                <option value="normal" selected>Normal</option>
-                <option value="vegetarian">Vegetarian</option>
-                <option value="vegan">Vegan</option>
-                <option value="keto">Keto</option>
-                <option value="paleo">Paleo</option>
-            </select>
-            <label for="allergies" class="form-label">Select Checkbox(s) for Food Allergies</label>
-                <label for="peanut">Peanut:</label>
-                <input type="checkbox" id="peanut" name="allergies" value="Peanut" checked><br>
-                <label for="milk">Milk:</label>
-                <input type="checkbox" id="milk" name="allergies" value="Milk"><br>
-                <label for="shellfish">Shellfish:</label>
-                <input type="checkbox" id="shellfish" name="allergies" value="Shellfish"><br>
-                <label for="egg">Egg:</label>
-                <input type="checkbox" id="egg" name="allergies" value="Egg"><br>
-                <label for="wheat">Wheat:</label>
-                <input type="checkbox" id="wheat" name="allergies" value="Wheat"><br><br>
-
-            <input type="hidden" id="json_str" name="json_str">  
-            <!-- Super lame, but setting the header doesn't work and i dunno waste time fillding with it -->
-            
-            <button type="submit" onclick="submitForm()">Get Guide</button>
+        <p>
+        <form action="/get_guide">
+            <button type="submit">Get Guide</button>
         </form>
+        </p>
+        <p>
+        <form action="/food_info">
+            <button type="submit">Get food info</button>
+        </form>
+        </p>
+        <p>
+        <form action="/subscription">
+            <button type="submit">Subscribe Newsletter</button>
+        </form>
+        </p>
+        <p>
+        <form action="/feedback">
+            <button type="submit">Feedback</button>
+        </form>
+        </p>
+    
     </main>
 </body>
 

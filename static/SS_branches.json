@@ -1,0 +1,37 @@
+{
+  "Central": [
+    "Block 31 Bendemeer Road #01-863",
+    "3 Yuan Ching Road",
+    "Block 506 Tampines Central 1 #01-361",
+    "7 Jurong West Avenue 5",
+    "Block 209 New Upper Changi Road"
+  ],
+  "East": [
+    "Block 301 Geylang Serai #01-01",
+    "Block 631 Bedok Reservoir Road #01-946",
+    "Block 739 Bedok Reservoir Road",
+    "108 McNair Road #01-285",
+    "Block 122 Ang Mo Kio Avenue 3 #01-181"
+  ],
+  "North": [
+    "Block 102 Yishun Avenue 5",
+    "6 Yishun Industrial Street 1",
+    "Block 200 Woodlands Industrial Park E",
+    "Block 115 Canberra Walk #01-04",
+    "Block 200 Yishun Avenue 2"
+  ],
+  "North-East": [
+    "Block 266 Serangoon Avenue 3",
+    "Block 86 Punggol Central",
+    "11 Rivervale Crescent",
+    "Block 417 Fernvale Link",
+    "Block 476D Upper Serangoon View"
+  ],
+  "West": [
+    "Block 513 Jurong West Street 52 #01-80",
+    "Block 365 Bukit Batok Street 31 #01-201",
+    "Block 107 Bukit Batok West Avenue 6",
+    "Block 506 Choa Chu Kang Street 51",
+    "Block 547B Segar Road #01-13"
+  ]
+}
